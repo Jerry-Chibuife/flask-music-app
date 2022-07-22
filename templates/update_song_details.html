@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div id="main">
+        <div id="first">
+            <form action="http://localhost:5000/song/edit/{{ song }}" method="post">
+                <h1>Edit Song Details</h1>
+                <h4>Input the details you want to change, leave the others</h4>
+{#                <a href="{{ url_for('get_All_Songs') }}"><button>View All Songs?</button></a>#}
+                <img src="" alt="">
+                <div class="form-div">
+                    <div>
+                        <label>Artiste Name :</label>
+                        <input name="artiste_name" placeholder="Enter Artiste Name" type="text">
+                    </div>
+                    <div>
+                        <label>Song Title :</label>
+                        <input name="title" placeholder="Enter Song Title" type="text">
+                    </div>
+                </div>
+                <div class="form-div">
+                    <div>
+                        <label>Album :</label>
+                        <input name="album" placeholder="Enter Song Album" type="text">
+                    </div>
+                    <div>
+                        <label>Genre :</label>
+                        <input name="genre" placeholder="Enter Genre" type="text">
+                    </div>
+                </div>
+                <div class="message-nd-btn">
+                    <div>
+                        <div>
+                            <label>Description :</label>
+                            <textarea name="desc" placeholder="How would you describe this song?">
+                            </textarea>
+                        </div>
+                        <img src="" alt="">
+                    </div>
+                    <input name="dsubmit" type="submit" value="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

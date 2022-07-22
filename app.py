@@ -32,22 +32,22 @@ def upload_song():
     return render_template('musicForm.html')
 
 
-@app.route('/song/edit/<song_id>', methods=['PATCH', 'GET'])
+@app.route('/song/edit/<song_id>', methods=['POST', 'GET'])
 def edit_song_details(song_id):
-    if request.method == 'PATCH':
-        song = db.song.find({'_id': ObjectId(song_id)})
+    song = db.song.find_one({'_id': ObjectId(song_id)})
+    if request.method == 'POST':
         if request.form['artiste_name'] != "":
             artiste = request.form['artiste_name']
         else:
             artiste = song.artiste_name
-        if request.form['song_title'] != "":
-            song_name = request.form['song_title']
+        if request.form['title'] != "":
+            song_name = request.form['title']
         else:
             song_name = song.song_title
-        if request.form['album_name'] != "":
-            album_name = request.form['album_name']
+        if request.form['album'] != "":
+            album_name = request.form['album']
         else:
-            album_name = song.album_name
+            album_name = song['album_name']
         if request.form['genre'] != "":
             song_genre = request.form['genre']
         else:
@@ -58,7 +58,9 @@ def edit_song_details(song_id):
             song_desc = song.desc
         db.song.update({'artiste_name': artiste, 'song_title': song_name, 'album_name': album_name,
                         'genre': song_genre, 'desc': song_desc, 'date_added': datetime.utcnow().__str__()})
-    return render_template('songList.html', list_of_songs=db.song.find())
+        return render_template('songList.html', list_of_songs=db.song.find())
+    else:
+        return render_template('update_song_details.html', song=song_id)
 
 
 @app.route('/song/delete/<song_id>')
