@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/songList.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div class="top-nav">
+        <h3>All Songs</h3>
+        <a href="{{ url_for('upload_song') }}"><button>Upload Song</button></a>
+    </div>
+
+        <table class="table">
+            <tr class="thead">
+                <th>Song</th>
+                <th>Album</th>
+                <th>Artiste</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+            {% for list_of_song in list_of_songs %}
+
+                <tr>
+                <td>{{ list_of_song['song_title']}}</td>
+                <td>{{ list_of_song['album_name'] }}</td>
+                <td>{{ list_of_song['artiste_name'] }}</td>
+                <td>{{ list_of_song['date_added'] }}</td>
+                <td>
+                    <div class="action-btns">
+{#                        <a><button>Edit</button></a>#}
+{#                        <a><button>Delete</button></a>#}
+                        <a href="/song/edit/{{ list_of_song._id }}"><button>Edit</button></a>
+                        <a href="/song/delete/{{ list_of_song._id }}"><button>Delete</button></a>
+                    </div>
+                </td>
+                </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

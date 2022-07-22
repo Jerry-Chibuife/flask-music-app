@@ -1,0 +1,51 @@
+.container{
+    /*width: 100%;*/
+    /*height: 100vh;*/
+    padding: 0 0 0 40px;
+}
+
+.top-nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5%;
+}
+
+.top-nav button{
+    padding: 5px 15px;
+    background-color: #008052;
+    color: white;
+    border-radius: 8px;
+    border: unset;
+}
+
+.table{
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+th, td{
+    padding: 0 40px;
+    text-align: left;
+}
+
+th {
+  background-color: #04AA6D;
+  color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+th, td {
+  border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.thead{
+    margin-bottom: 10%;
+}
+
+.action-btns{
+    width: 100%;
+}

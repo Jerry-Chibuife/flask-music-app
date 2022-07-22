@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="nav-bar">
+            <a href="{{ url_for('upload_song') }}"><button class="nav-bar-btn">Add A Song</button></a>
+            <a href="{{ url_for('get_All_Songs') }}"><button class="nav-bar-btn">View All Songs</button></a>
+        </div>
+        <img class="body-img" src="https://res.cloudinary.com/dcwpvbijn/image/upload/v1658433801/photo_2021-04-11_12-11-09_ad5jto.jpg" alt="">
+    </div>
+{% endblock %}
