@@ -1,7 +1,8 @@
 from _datetime import datetime
 from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/za-music_db"
@@ -36,37 +37,26 @@ def upload_song():
 def edit_song_details(song_id):
     song = db.song.find_one({'_id': ObjectId(song_id)})
     if request.method == 'POST':
-        if request.form['artiste_name'] != "":
-            artiste = request.form['artiste_name']
-        else:
-            artiste = song.artiste_name
-        if request.form['title'] != "":
-            song_name = request.form['title']
-        else:
-            song_name = song.song_title
-        if request.form['album'] != "":
-            album_name = request.form['album']
-        else:
-            album_name = song['album_name']
-        if request.form['genre'] != "":
-            song_genre = request.form['genre']
-        else:
-            song_genre = song.genre
-        if request.form['desc'] != "":
-            song_desc = request.form['desc']
-        else:
-            song_desc = song.desc
-        db.song.update({'artiste_name': artiste, 'song_title': song_name, 'album_name': album_name,
-                        'genre': song_genre, 'desc': song_desc, 'date_added': datetime.utcnow().__str__()})
-        return render_template('songList.html', list_of_songs=db.song.find())
-    else:
-        return render_template('update_song_details.html', song=song_id)
+        artiste = request.form['artiste_name']
+        song_name = request.form['title']
+        album_name = request.form['album']
+        song_genre = request.form['genre']
+        song_desc = request.form['desc']
+
+        print(artiste, song_name, album_name, song_genre, song_desc)
+        db.song.update_one({'_id': ObjectId(song_id)},
+                                    {'$set': {'artiste_name': artiste, 'song_title': song_name,
+                                              'album_name': album_name,
+                                              'genre': song_genre, 'desc': song_desc}})
+        return redirect(url_for('get_All_Songs'))
+
+    return render_template('update_song_details.html', song=song)
 
 
 @app.route('/song/delete/<song_id>')
 def delete_song(song_id):
     db.song.find_one_and_delete({'_id': ObjectId(song_id)})
-    return render_template('songList.html', list_of_songs=db.song.find())
+    return redirect(url_for('get_All_Songs'))
 
 
 @app.route('/songs')

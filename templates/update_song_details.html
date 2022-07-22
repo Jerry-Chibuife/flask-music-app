@@ -8,7 +8,7 @@
     <div class="container">
     <div id="main">
         <div id="first">
-            <form action="http://localhost:5000/song/edit/{{ song }}" method="post">
+            <form action="http://localhost:5000/song/edit/{{ song._id }}" method="post">
                 <h1>Edit Song Details</h1>
                 <h4>Input the details you want to change, leave the others</h4>
 {#                <a href="{{ url_for('get_All_Songs') }}"><button>View All Songs?</button></a>#}
@@ -16,33 +16,32 @@
                 <div class="form-div">
                     <div>
                         <label>Artiste Name :</label>
-                        <input name="artiste_name" placeholder="Enter Artiste Name" type="text">
+                        <input name="artiste_name" placeholder="Enter Artiste Name" type="text" value="{{ song.artiste_name }}">
                     </div>
                     <div>
                         <label>Song Title :</label>
-                        <input name="title" placeholder="Enter Song Title" type="text">
+                        <input name="title" placeholder="Enter Song Title" type="text" value="{{ song.song_title }}">
                     </div>
                 </div>
                 <div class="form-div">
                     <div>
                         <label>Album :</label>
-                        <input name="album" placeholder="Enter Song Album" type="text">
+                        <input name="album" placeholder="Enter Song Album" type="text" value="{{ song.album_name }}">
                     </div>
                     <div>
                         <label>Genre :</label>
-                        <input name="genre" placeholder="Enter Genre" type="text">
+                        <input name="genre" placeholder="Enter Genre" type="text" value="{{ song.genre }}">
                     </div>
                 </div>
                 <div class="message-nd-btn">
                     <div>
                         <div>
                             <label>Description :</label>
-                            <textarea name="desc" placeholder="How would you describe this song?">
-                            </textarea>
+                            <textarea name="desc" placeholder="How would you describe this song?">{{ song.desc }}</textarea>
                         </div>
                         <img src="" alt="">
                     </div>
-                    <input name="dsubmit" type="submit" value="submit">
+                    <input name="dsubmit" type="submit" value="Add Song">
                 </div>
             </form>
         </div>
